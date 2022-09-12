@@ -1,12 +1,12 @@
-@keyframes background-glow {
+@keyframes glow {
   0% {
-    filter: brightness(0.2) contrast(2) hue-rotate(0deg) saturate(1.3);
+    filter: brightness(0.2) contrast(2) hue-rotate(0deg) saturate(2);
   }
   50% {
-    filter: brightness(1.8) contrast(1) hue-rotate(-45deg) saturate(1);
+    filter: brightness(1.8) contrast(1) hue-rotate(-45deg) saturate(1.5);
   }
   100% {
-    filter: brightness(0.2) contrast(2) hue-rotate(-90deg) saturate(1.3);
+    filter: brightness(0.2) contrast(2) hue-rotate(-90deg) saturate(2);
   }
 }
 
@@ -26,11 +26,11 @@ body {
   overflow: hidden;
 }
 
-canvas {
+/* canvas {
   -ms-interpolation-mode: nearest-neighbor;
-  animation-duration: 11s;
+  animation-duration: 16s;
   animation-iteration-count: infinite;
-  animation-name: background-glow;
+  animation-name: glow;
   animation-timing-function: linear;
   image-rendering: -moz-crisp-edges;
   image-rendering: -o-crisp-edges;
@@ -39,25 +39,24 @@ canvas {
   image-rendering: crisp-edges;
   image-rendering: optimizeSpeed;
   image-rendering: pixelated;
-}
+} */
 
 h1 {
   cursor: default;
   font-size: 2rem;
   line-height: 1;
   margin: 0;
+  text-shadow: 0;
   user-select: none;
 }
 
-video {
-  bottom: 0;
-  height: 100vh;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  visibility: hidden;
-  width: 100vw;
+.cld-video-player {
+  height: 100vmax;
+  width: 100vmax;
+  animation-duration: 11s;
+  animation-iteration-count: infinite;
+  animation-name: glow;
+  animation-timing-function: linear;
 }
 
 #container {

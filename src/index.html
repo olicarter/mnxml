@@ -6,10 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mnml mxml</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="index.js" type="module"></script>
+
+    <link
+      href="../node_modules/cloudinary-video-player/dist/cld-video-player.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="../node_modules/cloudinary-video-player/dist/cld-video-player.min.js"
+      type="text/javascript"
+    ></script>
   </head>
   <body>
-    <video autoplay id="video" loop muted src="background.mp4"></video>
-    <canvas id="canvas"></canvas>
+    <video autoplay class="cld-video-player" id="video" loop muted></video>
+    <!-- <canvas id="canvas"></canvas> -->
     <div id="container">
       <div>
         <h1><span class="mnml">mnml</span><span class="mxml">mxml</span></h1>
@@ -22,7 +32,5 @@
         </div>
       </div>
     </div>
-
-    <script src="index.js"></script>
   </body>
 </html>
