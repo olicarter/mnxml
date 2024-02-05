@@ -1,20 +1,13 @@
 @keyframes glow {
   0% {
-    filter: brightness(0.2) contrast(2) hue-rotate(0deg) saturate(2);
+    filter: brightness(0.5) contrast(2) saturate(2);
   }
   50% {
-    filter: brightness(1.8) contrast(1) hue-rotate(-45deg) saturate(1.5);
+    filter: brightness(2) contrast(2) saturate(1.5);
   }
   100% {
-    filter: brightness(0.2) contrast(2) hue-rotate(-90deg) saturate(2);
+    filter: brightness(0.5) contrast(2) saturate(2);
   }
-}
-
-a {
-  color: white;
-  line-height: 1;
-  text-decoration: none;
-  user-select: none;
 }
 
 body {
@@ -26,21 +19,6 @@ body {
   overflow: hidden;
 }
 
-/* canvas {
-  -ms-interpolation-mode: nearest-neighbor;
-  animation-duration: 16s;
-  animation-iteration-count: infinite;
-  animation-name: glow;
-  animation-timing-function: linear;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -o-crisp-edges;
-  image-rendering: -webkit-crisp-edges;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  image-rendering: optimizeSpeed;
-  image-rendering: pixelated;
-} */
-
 h1 {
   cursor: default;
   font-size: 2rem;
@@ -50,36 +28,23 @@ h1 {
   user-select: none;
 }
 
-.cld-video-player {
-  height: 100vmax;
-  width: 100vmax;
-  animation-duration: 11s;
-  animation-iteration-count: infinite;
-  animation-name: glow;
-  animation-timing-function: linear;
-}
-
 #container {
   align-items: center;
   bottom: 0;
   display: flex;
   justify-content: center;
   left: 0;
-  mix-blend-mode: exclusion;
+  mix-blend-mode: difference;
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 50;
 }
 
-.mnml {
-  bottom: 3.5px;
-  position: relative;
-}
-
-.mxml {
-  display: inline-block;
-  position: relative;
-  top: 3.5px;
-  transform: scale(-1, -1);
+#canvas {
+  height: 100vh;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  filter: brightness(1.5) contrast(1.5) saturate(1.5);
 }

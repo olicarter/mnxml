@@ -10,8 +10,7 @@
     "build": "parcel build src/index.html"
   },
   "dependencies": {
-    "@cloudinary/url-gen": "^1.8.6",
-    "cloudinary-video-player": "^1.9.2"
+    "simplex-noise": "^4.0.1"
   },
   "devDependencies": {
     "parcel": "^2.7.0",

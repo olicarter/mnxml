@@ -1,60 +1,53 @@
-// import { Cloudinary, CloudinaryVideo } from '@cloudinary/url-gen'
-// import { streamingProfile } from '@cloudinary/url-gen/actions/transcode'
+import { createNoise3D } from 'simplex-noise'
 
-// const cloudinaryConfig = {
-//   cloudName: 'olicarter',
-//   apiKey: '437257888636718',
-//   apiSecret: 'm3c0vDvm_zTAV2EG6xreKU3cOBI',
-// }
+var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext('2d')
 
-const player = cloudinary.videoPlayer('video', {
-  bigPlayButton: false,
-  cloud_name: 'olicarter',
-  controls: false,
-})
-player
-  .source('mnmlmxml/background', {
-    sourceTypes: ['hls'],
-    transformation: { resource_type: 'video', streaming_profile: 'full_hd' },
-  })
-  .play()
-console.dir(player)
+const noise3D = createNoise3D()
 
-let amount = 1
+const perf = 10
+const speed = 0.001
+const divisor = 10000 / perf
 
-// const video = document.querySelector('#video')
-// const canvas = document.querySelector('#canvas')
-// const ctx = canvas.getContext('2d')
+function resize() {
+  canvas.width = window.innerWidth / perf
+  canvas.height = window.innerHeight / perf
+}
 
-// video.addEventListener('playing', draw)
+var timer = 0
+var timeg = 1
+var timeb = 2
 
-// video.addEventListener('timeupdate', () => {
-//   const percentPlayed = video.currentTime / video.duration
-//   console.log(percentPlayed * 2)
-// })
+function draw() {
+  var imageData = ctx.createImageData(canvas.width, canvas.height)
+  var data = imageData.data
 
-// function draw() {
-//   const videoWidth = video.clientWidth
-//   const videoHeight = video.clientHeight
+  for (var y = 0; y < canvas.height; y++) {
+    for (var x = 0; x < canvas.width; x++) {
+      var valuer = noise3D(x / divisor, y / divisor, timer) // Increase divisor for less detail
+      var valueg = noise3D(x / divisor, y / divisor, timeg) // Increase divisor for less detail
+      var valueb = noise3D(x / divisor, y / divisor, timeb) // Increase divisor for less detail
+      valuer = (valuer + 1) / 2
+      valueg = (valueg + 1) / 2
+      valueb = (valueb + 1) / 2
 
-//   ctx.canvas.width = videoWidth
-//   ctx.canvas.height = videoHeight
+      var cell = (y * canvas.width + x) * 4
+      data[cell] = valuer * 255 // red
+      data[cell + 1] = valueg * 255 // green
+      data[cell + 2] = valueb * 255 // blue
+      data[cell + 3] = 255 // alpha
+    }
+  }
 
-//   if (amount === 1) {
-//     ctx.drawImage(video, 0, 0, videoWidth, videoHeight)
-//   } else {
-//     ctx.webkitImageSmoothingEnabled = false
-//     ctx.mozImageSmoothingEnabled = false
-//     ctx.msImageSmoothingEnabled = false
-//     ctx.imageSmoothingEnabled = false
+  ctx.putImageData(imageData, 0, 0)
 
-//     const w = videoWidth * amount
-//     const h = videoHeight * amount
-//     // Render smaller image
-//     ctx.drawImage(video, 0, 0, w, h)
-//     // Stretch smaller image
-//     ctx.drawImage(canvas, 0, 0, w, h, 0, 0, videoWidth, videoHeight)
-//   }
+  timer += speed
+  timeg += speed + 0.001
+  timeb += speed + 0.002
 
-//   requestAnimationFrame(draw)
-// }
+  requestAnimationFrame(draw)
+}
+
+window.addEventListener('resize', resize)
+resize()
+draw()
